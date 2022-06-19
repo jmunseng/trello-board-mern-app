@@ -3,8 +3,12 @@
 .column {
   flex: 0 0 auto;
   width: 300px;
-  height: calc(100% - #{$gap});
-
+  // height: calc(100% - #{$gap});
+  height: calc(100vh - 40px - 50px - #{$gap});
+  // &:not(:first-child) {
+  //   margin-left: $gap;
+  // }
+  margin-left: $gap;
   > * {
     background-color: $list-bg-color;
     color: #333;
@@ -18,6 +22,7 @@
     font-weight: bold;
     border-top-left-radius: $column-boarder-radius;
     border-top-right-radius: $column-boarder-radius;
+    cursor: pointer;
   }
   footer {
     padding-left: 15px;
@@ -27,7 +32,7 @@
     border-bottom-right-radius: $column-boarder-radius;
   }
 
-  ul.card-list {
+  div.card-list {
     list-style-type: none;
     margin: 0;
     max-height: calc(
@@ -46,6 +51,21 @@
       border: 4px solid transparent;
       border-radius: 8px;
       background-clip: padding-box;
+    }
+    .card-ghost {
+      transition: transform 0.18s ease;
+      transform: rotateZ(5deg);
+    }
+
+    .card-ghost-drop {
+      transition: transform 0.18s ease-in-out;
+      transform: rotateZ(0deg);
+    }
+
+    .cards-drop-preview {
+      background-color: rgba(150, 150, 200, 0.1);
+      border: 1px dashed #abc;
+      margin: 5px 45px 5px 5px;
     }
   }
 }

@@ -1,15 +1,14 @@
 @import '../../settings';
 
-li.card-item {
+div.card-item {
   background-color: white;
   padding: $gap;
   border-radius: $card-boarder-radius;
   box-shadow: 0 1px 1px rgba($color: black, $alpha: 0.1);
+  cursor: pointer;
 
-  // &:not(:last-child) to Not apply css to last li tag
-  &:not(:last-child) {
-    margin-bottom: $gap;
-  }
+  margin-bottom: $gap;
+
   img {
     display: block;
     width: calc(100% + 2 * #{$gap});

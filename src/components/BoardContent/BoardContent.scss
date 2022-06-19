@@ -1,7 +1,7 @@
 @import '../../settings';
 .board-columns {
   display: flex;
-  margin: 0 $gap $gap;
+  margin: 0 $gap $gap 0;
   gap: 10px;
   overflow-x: auto;
 
@@ -14,5 +14,10 @@
   &::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.24);
     border-radius: 5px;
+  }
+  .column-drop-preview {
+    background-color: rgba(150, 150, 200, 0.1);
+    border: 1px dashed #abc;
+    margin: 5px;
   }
 }

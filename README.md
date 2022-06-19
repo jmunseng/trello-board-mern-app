@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# Trello Board MERN Stack
 
-Kanban Board MERN Stack
-Used SASS,
+## Languages
+
+Used SASS/SCSS,
+
+## packages
+
+react-smooth-dnd //package to make mouth draging avaliable

@@ -3,10 +3,18 @@ import './Card.scss';
 const Card = (props) => {
   const { card } = props;
   return (
-    <li className="card-item">
-      {card.image && <img src={card.image} className="card-cover" alt="" />}
+    <div className="card-item">
+      {card.image && (
+        <img
+          className="card-cover"
+          src={card.image}
+          // preventDefault Image prevent browser pull the image only
+          onMouseDown={(e) => e.preventDefault()}
+          alt=""
+        />
+      )}
       {card.title}
-    </li>
+    </div>
   );
 };
 
