@@ -1,3 +1,4 @@
+import { times } from 'lodash';
 import React from 'react';
 import './Card.scss';
 const Card = (props) => {

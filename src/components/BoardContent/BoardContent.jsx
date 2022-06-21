@@ -5,6 +5,9 @@ import _, { isEmpty } from 'lodash';
 import { mapOrder } from '../../utilities/sorts';
 
 import { initData } from '../../actions/initData';
+
+import { applyDrag } from '../../utilities/dragDrop';
+
 import './BoardContent.scss';
 
 const BoardContent = () => {
@@ -39,9 +42,38 @@ const BoardContent = () => {
   }
 
   const onColumnDrop = (dropResult) => {
-    console.log('>>> inside onColumnDrop', dropResult);
+    let newColumns = [...columns];
+    newColumns = applyDrag(newColumns, dropResult);
+
+    let newBoard = { ...board };
+    newBoard.columnOrder = newColumns.map((column) => column.id);
+    newBoard.columns = newColumns;
+
+    setColumns(newColumns);
+    setBoard(newBoard);
   };
 
+  const onCardDrop = (dropResult, columnId) => {
+    if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+      console.log(
+        '>>> inside onCardDrop:',
+        dropResult,
+        'with columnId =',
+        columnId
+      );
+      let newColumns = [...columns];
+
+      let currentColumn = newColumns.find((column) => column.id === columnId);
+
+      currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
+
+      console.log('currentColumn ', currentColumn.cards);
+
+      currentColumn.cardOrder = currentColumn.cards.map((card) => card.id);
+
+      setColumns(newColumns);
+    }
+  };
   return (
     <div className="board-columns">
       <Container
@@ -60,10 +92,13 @@ const BoardContent = () => {
           columns.map((column, index) => {
             return (
               <Draggable key={column.id}>
-                <Column key={index} column={column} />;
+                <Column key={index} column={column} onCardDrop={onCardDrop} />;
               </Draggable>
             );
           })}
+        <div className="add-new-column">
+          <strong> + Add another column</strong>
+        </div>
       </Container>
     </div>
   );
