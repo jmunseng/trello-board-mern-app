@@ -40,7 +40,7 @@ const Column = (props) => {
       </div>
       <footer>
         <div className="footer-action">
-          <strong>+ Add another card</strong>
+          <i className="fa fa-plus icon"></i> Add another card
         </div>
       </footer>
     </div>

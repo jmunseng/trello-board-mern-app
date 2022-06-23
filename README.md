@@ -2,7 +2,7 @@
 
 ## Languages
 
-Used SASS/SCSS,
+Used SASS/SCSS, Bootstrap, Fontawesome,
 
 ## packages
 
