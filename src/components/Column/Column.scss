@@ -17,12 +17,44 @@
   header {
     padding-left: 15px;
     height: $column-header-height;
-    line-height: $column-header-height;
+    // line-height: $column-header-height;
     font-size: 16px;
     font-weight: bold;
     border-top-left-radius: $column-boarder-radius;
     border-top-right-radius: $column-boarder-radius;
     cursor: pointer;
+  }
+  .column-drag-handle {
+    display: flex;
+    padding-right: 3px;
+    padding-top: 5px;
+    padding-left: 10px;
+
+    .column-title {
+      width: 90%;
+    }
+
+    .column-dropdown {
+      width: 10%;
+
+      .dropdown-toggle {
+        padding: 2px 7px;
+
+        &::after {
+          content: '...';
+          border: none !important;
+          outline: none !important;
+          box-shadow: none !important;
+        }
+        &:hover {
+          background-color: #091e4214;
+        }
+        &:focus {
+          outline: none !important;
+          box-shadow: none !important;
+        }
+      }
+    }
   }
   footer {
     padding-left: 15px;

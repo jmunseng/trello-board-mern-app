@@ -100,7 +100,28 @@ const BoardContent = () => {
     });
 
     setColumns(_columns);
+    setValueInput('');
+    inputRef.current.focus();
   };
+
+  const onUpdateColumn = (newColumns) => {
+    const columnIdUpdate = newColumns.id;
+    let ncols = [...columns];
+    let index = ncols.findIndex((item) => item.id === columnIdUpdate);
+
+    if (newColumns._destroy) {
+      //remove
+      ncols.splice(index, 1);
+    } else {
+      //update title
+      ncols[index] = newColumns;
+    }
+    setColumns(ncols);
+  };
+
+  //new edited columns
+  console.log(columns);
+
   return (
     <div className="board-columns">
       <Container
@@ -119,7 +140,13 @@ const BoardContent = () => {
           columns.map((column, index) => {
             return (
               <Draggable key={column.id}>
-                <Column key={index} column={column} onCardDrop={onCardDrop} />;
+                <Column
+                  key={index}
+                  column={column}
+                  onCardDrop={onCardDrop}
+                  onUpdateColumn={onUpdateColumn}
+                />
+                ;
               </Draggable>
             );
           })}
