@@ -18,11 +18,11 @@
   .column-drop-preview {
     background-color: rgba(150, 150, 200, 0.1);
     border: 1px dashed #abc;
-    margin: 5px;
+    margin-left: $gap;
   }
   .add-new-column {
     width: 250px;
-    // height: 32px;
+    height: 40px;
     line-height: 32px;
     padding: 4px 0 4px 15px;
     cursor: pointer;

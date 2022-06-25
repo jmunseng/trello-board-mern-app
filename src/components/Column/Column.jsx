@@ -37,6 +37,7 @@ const Column = (props) => {
   const onConfirmModalAction = (type) => {
     if (type === MODAL_ACTION_CLOSE) {
       // save
+      setIsShowModalDelete(false);
     }
     //remove column
     if (type === MODAL_ACTION_COMFIRM) {
@@ -142,12 +143,25 @@ const Column = (props) => {
               })}
           </Container>
         </div>
+
+        <div className="add-new-card">
+          <textarea
+            className="form-control"
+            rows="2"
+            placeholder="Enter a title for this card.."
+          ></textarea>
+          <div className="group-btn">
+            <button className="btn btn-primary">Add list</button>
+            <i className="fa fa-times"></i>
+          </div>
+        </div>
         <footer>
           <div className="footer-action">
             <i className="fa fa-plus icon"></i> Add another card
           </div>
         </footer>
       </div>
+      {/* //popup */}
       <ComfirmModal
         show={isShowModalDelete}
         title={'Remove a column'}
