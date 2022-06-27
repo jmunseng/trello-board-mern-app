@@ -12,6 +12,7 @@ import {
 import { Container, Draggable } from 'react-smooth-dnd';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
+import { v4 as uuidv4 } from 'uuid';
 
 import './Column.scss';
 
@@ -23,6 +24,16 @@ const Column = (props) => {
   const [titleColumn, setTitleColumn] = useState('');
   const [isFirstClick, setIsFirstClick] = useState(true);
   const inputRef = useRef(null);
+
+  const [isShowAddNewCard, setIsShowAddNewCard] = useState(false);
+  const [valueTextArea, setValueTextArea] = useState('');
+  const textAreaRef = useRef(null);
+
+  useEffect(() => {
+    if (isShowAddNewCard === true && textAreaRef && textAreaRef.current) {
+      textAreaRef.current.focus();
+    }
+  }, [isShowAddNewCard]);
 
   useEffect(() => {
     if (column && column.title) {
@@ -78,6 +89,27 @@ const Column = (props) => {
     if (e.code === 'Enter' || e.code === 'NumpadEnter') {
       e.target.blur();
     }
+  };
+  const handlerAddNewCard = () => {
+    if (!valueTextArea) {
+      textAreaRef.current.focus();
+      return;
+    }
+    const newCard = {
+      id: uuidv4(),
+      boardId: column.boardId,
+      columnId: column.id,
+      title: valueTextArea,
+      image: null,
+    };
+    let newColumn = { ...column };
+    newColumn.cards = [...newColumn.cards, newCard];
+    newColumn.cardOrder = newColumn.cards.map((card) => card.id);
+
+    onUpdateColumn(newColumn);
+
+    setValueTextArea('');
+    setIsShowAddNewCard(false);
   };
 
   return (
@@ -142,24 +174,38 @@ const Column = (props) => {
                 );
               })}
           </Container>
+          {isShowAddNewCard === true && (
+            <div className="add-new-card">
+              <textarea
+                className="form-control"
+                rows="2"
+                placeholder="Enter a title for this card.."
+                ref={textAreaRef}
+                value={valueTextArea}
+                onChange={(event) => setValueTextArea(event.target.value)}
+              ></textarea>
+              <div className="group-btn">
+                <button
+                  className="btn btn-primary"
+                  onClick={() => handlerAddNewCard()}
+                >
+                  Add list
+                </button>
+                <i
+                  className="fa fa-times"
+                  onClick={() => setIsShowAddNewCard(false)}
+                ></i>
+              </div>
+            </div>
+          )}
         </div>
-
-        <div className="add-new-card">
-          <textarea
-            className="form-control"
-            rows="2"
-            placeholder="Enter a title for this card.."
-          ></textarea>
-          <div className="group-btn">
-            <button className="btn btn-primary">Add list</button>
-            <i className="fa fa-times"></i>
-          </div>
-        </div>
-        <footer>
-          <div className="footer-action">
-            <i className="fa fa-plus icon"></i> Add another card
-          </div>
-        </footer>
+        {isShowAddNewCard === false && (
+          <footer onClick={() => setIsShowAddNewCard(true)}>
+            <div className="footer-action">
+              <i className="fa fa-plus icon"></i> Add card
+            </div>
+          </footer>
+        )}
       </div>
       {/* //popup */}
       <ComfirmModal

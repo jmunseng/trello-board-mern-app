@@ -8,6 +8,7 @@ import { initData } from '../../actions/initData';
 
 import { applyDrag } from '../../utilities/dragDrop';
 import { v4 as uuidv4 } from 'uuid';
+
 import './BoardContent.scss';
 
 const BoardContent = () => {
