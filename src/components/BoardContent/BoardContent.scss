@@ -1,9 +1,10 @@
 @import '../../settings';
 .board-columns {
   display: flex;
-  margin: 0 $gap $gap 0;
+  margin: 0 $gap 5px 0;
   gap: 10px;
   overflow-x: auto;
+  overflow-y: hidden;
 
   &::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -37,6 +38,7 @@
   }
   .content-add-column {
     width: 250px;
+    height: fit-content;
     padding: 5px;
     margin-left: 10px;
     border-radius: $card-boarder-radius;
@@ -51,6 +53,9 @@
         padding-left: 10px;
         cursor: pointer;
       }
+    }
+    .form-control {
+      width: unset !important;
     }
   }
 }
